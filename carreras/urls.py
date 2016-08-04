@@ -23,3 +23,4 @@ urlpatterns = [
     url(r'^crear/', 'registros.views.crear', name='crear'),
 ]
 
+# ./manage.py runserver --settings=carreras.settings

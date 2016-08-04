@@ -36,3 +36,5 @@ def crear(request):
     args['form'] = form
 
     return render_to_response('crear_registro.html', args)
+
+#manage.py runserver --noreload
