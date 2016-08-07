@@ -8,3 +8,4 @@ class RegistroAdmin(admin.ModelAdmin):
 
 admin.site.register(Registro,RegistroAdmin)
 
+

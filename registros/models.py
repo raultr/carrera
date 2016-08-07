@@ -17,5 +17,8 @@ class Registro(models.Model):
 	ciclista = models.CharField(max_length=50,blank=True, default='')
 	email_ciclista = models.CharField(max_length=50,blank=True, default='')
 
-	def __str__(self):
-		return self.paterno + ' ' + self.materno + ' ' + self.nombre
+	#def __str__(self):
+	#	return self.paterno + ' ' + self.materno + ' ' + self.nombre
+
+	def __unicode__(self):
+ 		return u'{c}/{l}/{p}'.format(c=self.paterno, l=self.materno, p=self.nombre)
