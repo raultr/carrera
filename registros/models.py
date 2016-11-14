@@ -1,3 +1,5 @@
+from django.db.models.signals import pre_save, post_save
+from django.core.exceptions import ValidationError
 from django.db import models
 
 class Registro(models.Model):
@@ -10,7 +12,7 @@ class Registro(models.Model):
 	genero   = models.CharField(max_length=1,default="",blank=True)
 	cp       = models.CharField(max_length=10, default = '')
 	estado   = models.CharField(max_length=7, default = '')
-	email    = models.CharField(max_length=50,blank=True, default='')
+	email    = models.CharField(max_length=50,blank=True, default='', unique=True,error_messages={'unique':"Alguien ya fue registrado con ese email"})
 	telefono = models.CharField(max_length=50,blank=True, default='')
 	alergia  = models.CharField(max_length=50,blank=True, default='')
 	duatlon  = models.CharField(max_length=50,blank=True, default='')
@@ -21,4 +23,4 @@ class Registro(models.Model):
 	#	return self.paterno + ' ' + self.materno + ' ' + self.nombre
 
 	def __unicode__(self):
- 		return u'{c}/{l}/{p}'.format(c=self.paterno, l=self.materno, p=self.nombre)
+		return u'{c}/{l}/{p}'.format(c=self.paterno, l=self.materno, p=self.nombre)
