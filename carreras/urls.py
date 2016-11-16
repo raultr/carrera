@@ -19,6 +19,7 @@ from django.contrib import admin
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^', include('registros.urls')),
+    url(r'^', include('municipios.urls')),
     #url(r'^$', 'registros.views.home', name='home'),
     #url(r'^registros/(?P<id_registro>[0-9]+)/$', 'registros.views.one_post', name="one_post"),
     #url(r'^crear/', 'registros.views.crear', name='crear'),

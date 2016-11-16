@@ -1,6 +1,7 @@
 from django.db.models.signals import pre_save, post_save
 from django.core.exceptions import ValidationError
 from django.db import models
+from municipios.models import Municipio
 
 class Registro(models.Model):
 	paterno  = models.CharField(max_length=50, default='')
@@ -17,6 +18,7 @@ class Registro(models.Model):
 	alergia  = models.CharField(max_length=50,blank=True, default='')
 	duatlon  = models.CharField(max_length=50,blank=True, default='')
 	ciclista = models.CharField(max_length=50,blank=True, default='')
+	municipio = models.ForeignKey(Municipio,null=True, default=1,related_name='estado_municipio',on_delete=models.PROTECT)						
 	email_ciclista = models.CharField(max_length=50,blank=True, default='')
 
 	#def __str__(self):
