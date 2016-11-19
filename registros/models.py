@@ -20,9 +20,12 @@ class Registro(models.Model):
 	ciclista = models.CharField(max_length=50,blank=True, default='')
 	municipio = models.ForeignKey(Municipio,null=True, default=1,related_name='estado_municipio',on_delete=models.PROTECT)						
 	email_ciclista = models.CharField(max_length=50,blank=True, default='')
+	numero = models.IntegerField(default=1)
 
 	#def __str__(self):
 	#	return self.paterno + ' ' + self.materno + ' ' + self.nombre
 
 	def __unicode__(self):
 		return u'{c}/{l}/{p}'.format(c=self.paterno, l=self.materno, p=self.nombre)
+
+#./manage.py runserver --settings=carreras.settings

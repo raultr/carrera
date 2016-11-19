@@ -40,7 +40,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'municipios',
-    'registros'
+    'registros',
+    'consecutivos',
+    'sequences.apps.SequencesConfig',
 ]
 
 MIDDLEWARE_CLASSES = [

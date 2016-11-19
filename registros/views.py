@@ -1,25 +1,21 @@
 from rest_framework.generics import ListAPIView, ListCreateAPIView, RetrieveUpdateDestroyAPIView
 from rest_framework.response import Response
-from django.db import IntegrityError
+from django.db import transaction,IntegrityError
 from django.db.models import Q
 from .models import Registro
+from consecutivos.models import Consecutivo
 from .serializers import RegistroSerializer
+from sequences import get_next_value
 
 class RegistroDetalleMixin(object):
 	queryset = Registro.objects.all()
 	serializer_class = RegistroSerializer
 
 class RegistroLista(RegistroDetalleMixin, ListCreateAPIView):
-	pass
-	# def create(self, request, *args, **kwargs):
-	# try:
-	# 	return super(ListCreateAPIView,self).create(request, *args, **kwargs)
-	# except IntegrityError:
-	# 	import ipdb;ipdb.set_trace()
-	# 	return bad_request(request)
-	# except Exception as e:
-	# 	import ipdb;ipdb.set_trace()
-	# 	return Response( e.args[0], status=status.HTTP_400_BAD_REQUEST)
+	def perform_create(self, serializer):
+		with transaction.atomic():
+			num_sig = Consecutivo.objects.get(llave=self.request.data['genero'])
+			serializer.save(numero=get_next_value(num_sig.nombre_secuencia, initial_value=num_sig.valor_inicial))
 
 class RegistroIndividual(RegistroDetalleMixin,RetrieveUpdateDestroyAPIView):
 	pass
