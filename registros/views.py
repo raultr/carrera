@@ -23,5 +23,6 @@ class RegistroIndividual(RegistroDetalleMixin,RetrieveUpdateDestroyAPIView):
 class RegistroDatosEmail(RegistroDetalleMixin,ListAPIView):
 	def get_queryset(self):
 		valor_buscado = self.kwargs['email_buscado'].strip()
-		queryset=Registro.objects.filter(email=valor_buscado).exclude(duatlon='infantil')
+		carrera = self.kwargs['carrera'].strip()
+		queryset=Registro.objects.filter(email=valor_buscado,genero=carrera).exclude(duatlon='infantil').order_by('-id')[:1]
 		return queryset
